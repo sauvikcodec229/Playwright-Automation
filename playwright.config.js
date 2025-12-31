@@ -45,7 +45,7 @@ const config = ({
   //Playwright enforces a timeout for each test for around 30 seconds default.
   //  Use explicit timeouts when you think the default one is not enough for me, otherwise not required
   
-  testMatch: ['Day6.spec.js'], //to run a specific test under the test directory
+  // testMatch: ['Day6.spec.js'], //to run a specific test under the test directory
 
   timeout : 40*1000, // or we can also write 40000 ms, it takes in ms format. 
   // This is applicable to the entire project and to all tests like waiting for button to be clickable
