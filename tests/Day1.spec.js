@@ -8,11 +8,13 @@ test('Negative Scenario: Logging into Lambda Test',async ({browser})=>  // test 
      const page = await context.newPage(); 
      await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url
     
+     await page.locator("//a[text()='Login']").waitFor()
      const loginLink =  page.locator("//a[text()='Login']");
      loginLink.click();
 
+     await page.locator("input[name='email']").waitFor();
      const userName = page.locator("input[name='email']");
-     await userName.fill("test@gmail.com");
+     await userName.fill("test123@gmail.com");
 
      const password = page.locator("input#password");
      await password.fill("test@12345");
@@ -27,9 +29,9 @@ test('Negative Scenario: Logging into Lambda Test',async ({browser})=>  // test 
      const errorMsg = await errorText.textContent();
      console.log("The Error msg displayed for entering wrong password is : "+errorMsg);
 
-     expect("p[data-testid='errors-password']").toContain("Please enter a correct email address and password");
+     await expect(page.locator("p[data-testid='errors-password']")).toContainText("Please enter a correct email address and password");
 
-    //  div[class^='inline-block dropdown']
+    
 });  
 
 test('Scenario: using nth() for locator which identifies multiple elements',async ({browser})=>  // test annotation -> //test('test case name', testFunction)

@@ -9,10 +9,13 @@ test("Special Locators", async ({page})=>
     //that will not work, that name shud be written inside the text box , then only we can get that text box
     //by these methods and enter data inside it
    await page.goto("https://rahulshettyacademy.com/angularpractice/"); 
+
+   await page.getByLabel("Check me out if you Love IceCreams!").waitFor();
+
    //If a webelement has a label tag and an associated text with it
    // , then we can get that element by using getByLabel() in playwright
    await page.getByLabel("Check me out if you Love IceCreams!").click();
-//    await page.getByLabel("Employed").click();
+// await page.getByLabel("Employed").click();
    await page.getByLabel("Employed").check();// we can use check() also instead of click() if its a chekbox or radiobutton
    
    //When there is any edit box associated with label, we cant use getByLabel, we need to only use for checkbox or radio button

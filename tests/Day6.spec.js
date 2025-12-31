@@ -57,7 +57,7 @@ test("Scenario: Asserting Hidden elements",async ({page})=>
     await expect(page.locator("#displayed-text")).toBeVisible();//will assert whether element is visible or not
     await page.locator("#hide-textbox").click();
     await expect(page.locator("#displayed-text")).toBeHidden();
-    page.goForward();
+    await page.goForward();
 
 });
 
@@ -72,7 +72,7 @@ test("Scenario: Handling Alert Popups/Dialogs",async ({page})=>
      //We will need to tell playwright beforehand to listen for a javascript event such as dialogbox
      //When an event happens it will immediately listen to it and tell that hey an event has occurred
      //Then based on the action given , it will perform it on that dialog box which is the event which we have mentioned.
-     await page.on('dialog',dialog => dialog.accept());
+      page.on('dialog',dialog => dialog.accept());
     //page.on('dialog',dialog => dialog.dismiss());
 
     //Once we have told playwright to start listening , now we can go ahead and do the action which will
