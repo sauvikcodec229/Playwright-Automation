@@ -45,10 +45,11 @@ const config = ({
   //Playwright enforces a timeout for each test for around 30 seconds default.
   //  Use explicit timeouts when you think the default one is not enough for me, otherwise not required
   
-  testMatch: ['Day1.spec.js','Day2.spec.js','Day3.spec.js',
+  testMatch: ['Assignment1.spec.js','Day1.spec.js','Day2.spec.js','Day3.spec.js',
                'Day4.spec.js','Day5.spec.js','Day6.spec.js'], //to run a specific test under the test directory
 
-  timeout : 40*1000, // or we can also write 40000 ms, it takes in ms format. 
+  // testMatch: ['Assignment1.spec.js'],            
+  timeout : 50*1000, // or we can also write 40000 ms, it takes in ms format. 
   // This is applicable to the entire project and to all tests like waiting for button to be clickable
   
   expect:{  //timeout for assertion validations like toHaveTitle()
@@ -62,7 +63,7 @@ const config = ({
     browserName:'chromium', //setting the browser 
     headless: true, // if made false it will run in normal mode , no need to write --headed flag in terminal always now
     screenshot:'on',  //for taking screenshot of every step
-    trace: 'on', // 'on','off','retain-on-failure' -->if we want to collect the detailed report of what happened in each automation step
+    trace: 'retain-on-failure', // 'on','off','retain-on-failure' -->if we want to collect the detailed report of what happened in each automation step
     
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     // trace: 'on-first-retry',
