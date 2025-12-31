@@ -6,7 +6,7 @@ let orderID;
 test("Scenario: Application Login using Special Selectors",async ({page})=>
 {
   await page.goto("https://rahulshettyacademy.com/client/#/auth/login"); 
-
+  await page.waitForTimeout(2000);
   const username = page.getByPlaceholder("email@example.com");
   const passwrod = page.getByPlaceholder("enter your passsword");
 
@@ -78,6 +78,7 @@ await page.locator("div.card-body").filter({hasText:productName}).getByRole("but
 test("Scenario: Finding OrderID in Orders Page",async ({page})=>
 {
   await page.goto("https://rahulshettyacademy.com/client/#/auth/login"); 
+  await page.waitForTimeout(2000);
   const username = page.locator("#userEmail");
   const passwrod = page.locator("#userPassword");
   const loginBtn = page.locator("[value='Login']");

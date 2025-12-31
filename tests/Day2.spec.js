@@ -11,6 +11,7 @@ test('Scenario: Handling dropdowns',async ({browser})=>  // test annotation -> /
      const page = await context.newPage(); 
      await page.goto("https://rahulshettyacademy.com/loginpagePractise/"); // to navigate to the given url
      
+     await page.waitForTimeout(2000);
      const username = page.locator("#username");
      const signIn = page.locator("#signInBtn");
      const password = page.locator("[type='password']");
@@ -30,7 +31,7 @@ test('Scenario: Handling dropdowns',async ({browser})=>  // test annotation -> /
 }); 
 
 
-test('Scenario: Handling Radio Buttons',async ({browser})=>  // test annotation -> //test('test case name', testFunction)
+test.only('Scenario: Handling Radio Buttons',async ({browser})=>  // test annotation -> //test('test case name', testFunction)
 {
 // NOTE: await is required only when we are performing any playwright related action.
 //  We need to give await only in the scope where playwright related action is performed
@@ -39,6 +40,7 @@ test('Scenario: Handling Radio Buttons',async ({browser})=>  // test annotation 
      const page = await context.newPage(); 
      await page.goto("https://rahulshettyacademy.com/loginpagePractise/"); // to navigate to the given url
      
+     await page.waitForTimeout(2000);
      const username = page.locator("#username");
      const signIn = page.locator("#signInBtn");
      const password = page.locator("[type='password']");
@@ -55,8 +57,8 @@ test('Scenario: Handling Radio Buttons',async ({browser})=>  // test annotation 
     await okayButton.click(); //this is a web based popup and not a javascrpt based popup
 
     //Assertion to check whether the radiobutton is selected or not
-    await expect(page.locator("label.customradio").nth(1)).toBeChecked(); //Here await is written at first becoz action is peformed outside the outer brackets, toBeChecked()
-    const isUserChecked = await page.locator("label.customradio").nth(1).isChecked(); //It will return boolean true or false
+    await expect(radioButton2).toBeChecked(); //Here await is written at first becoz action is peformed outside the outer brackets, toBeChecked()
+    const isUserChecked = await radioButton2.isChecked(); //It will return boolean true or false
     console.log("The radio button is checked: "+isUserChecked);
 
 
@@ -88,6 +90,7 @@ test('Scenario: Checking Blinking Text Attribute Value',async ({browser})=>  // 
      const page = await context.newPage(); 
      await page.goto("https://rahulshettyacademy.com/loginpagePractise/"); // to navigate to the given url
      
+     await page.waitForTimeout(2000);
      const username = page.locator("#username");
      const signIn = page.locator("#signInBtn");
      const password = page.locator("[type='password']");
@@ -106,6 +109,7 @@ test('Scenario: Handling Child Windows using Playwright',async ({browser})=>  //
      const page = await context.newPage(); 
      await page.goto("https://rahulshettyacademy.com/loginpagePractise/"); // to navigate to the given url
 
+     await page.waitForTimeout(2000);
     const documentLink = page.locator("a[href*='documents-request']"); // locator for Link to open a new page
     await expect(documentLink).toHaveAttribute("class","blinkingText");
 

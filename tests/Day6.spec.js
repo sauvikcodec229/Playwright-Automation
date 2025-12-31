@@ -7,6 +7,7 @@ test("Scenario: Handling Calenders",async ({page})=>
   const year ="1999";
   await page.goto("https://rahulshettyacademy.com/seleniumPractise/#/offers"); 
  
+  await page.waitForTimeout(2000);
   const calender= page.locator("div.react-date-picker");
   await calender.click();
 
@@ -52,7 +53,9 @@ test("Scenario: Asserting Hidden elements",async ({page})=>
 {
   
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+    await page.waitForTimeout(2000);
     await page.goto("https://www.google.com/");
+    await page.waitForTimeout(2000);
     await page.goBack();
     await expect(page.locator("#displayed-text")).toBeVisible();//will assert whether element is visible or not
     await page.locator("#hide-textbox").click();
@@ -67,7 +70,7 @@ test("Scenario: Handling Alert Popups/Dialogs",async ({page})=>
   
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
      
-    
+    await page.waitForTimeout(2000);
     //The on() method under page will help us to listen for events
      //We will need to tell playwright beforehand to listen for a javascript event such as dialogbox
      //When an event happens it will immediately listen to it and tell that hey an event has occurred
@@ -85,7 +88,7 @@ test("Scenario: Handling Alert Popups/Dialogs",async ({page})=>
 test("Scenario: Performing Mouse Hover",async ({page})=>
 {
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
-     
+     await page.waitForTimeout(2000);
     await page.locator("#mousehover").hover();
 
 });
@@ -100,7 +103,7 @@ test("Scenario: Handling Frames",async ({page})=>
   //Sometimes the frame will be present under a tag called "iframe" or "frameset"
  //  To switch to that frame, we need a name or id attribute to be present
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
-     
+     await page.waitForTimeout(2000);
     const framePage = page.frameLocator("#courses-iframe"); //this will switch to the frame with the id given inside function
     //this new frame page object will be returned which we need to use for performing
     // any automation inside the frame

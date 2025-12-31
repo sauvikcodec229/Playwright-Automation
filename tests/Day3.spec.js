@@ -6,6 +6,8 @@ let orderID;
 test("Scenario: Application Login",async ({page})=>
 {
   await page.goto("https://rahulshettyacademy.com/client/#/auth/login"); 
+  await page.waitForTimeout(2000);
+
   const username = page.locator("#userEmail");
   const passwrod = page.locator("#userPassword");
   const loginBtn = page.locator("[value='Login']");
@@ -103,6 +105,7 @@ test("Scenario: Application Login",async ({page})=>
 test("Scenario: Finding OrderID in Orders Page",async ({page})=>
 {
   await page.goto("https://rahulshettyacademy.com/client/#/auth/login"); 
+  await page.waitForTimeout(2000);
   const username = page.locator("#userEmail");
   const passwrod = page.locator("#userPassword");
   const loginBtn = page.locator("[value='Login']");

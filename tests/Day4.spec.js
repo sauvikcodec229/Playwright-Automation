@@ -9,7 +9,7 @@ test("Special Locators", async ({page})=>
     //that will not work, that name shud be written inside the text box , then only we can get that text box
     //by these methods and enter data inside it
    await page.goto("https://rahulshettyacademy.com/angularpractice/"); 
-
+    await page.waitForTimeout(2000);
    await page.getByLabel("Check me out if you Love IceCreams!").waitFor();
 
    //If a webelement has a label tag and an associated text with it

@@ -8,9 +8,10 @@ test('Negative Scenario: Logging into Lambda Test',async ({browser})=>  // test 
      const page = await context.newPage(); 
      await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url
     
+     await page.waitForTimeout(2000);
      await page.locator("//a[text()='Login']").waitFor()
      const loginLink =  page.locator("//a[text()='Login']");
-     loginLink.click();
+     await loginLink.click();
 
      await page.locator("input[name='email']").waitFor();
      const userName = page.locator("input[name='email']");
@@ -20,7 +21,7 @@ test('Negative Scenario: Logging into Lambda Test',async ({browser})=>  // test 
      await password.fill("test@12345");
 
      const loginButton = page.locator("button#login-button");
-     loginButton.click();
+     await loginButton.click();
 
     //Unlike Selenium we dont need to mention any explicit wait here for visibility of the error msg
     // Even though initially this error msg will nt be displayed until we give the wrong password
