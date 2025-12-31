@@ -59,7 +59,7 @@ const config = ({
   use: {
   
     browserName:'chromium', //setting the browser 
-    headless: false, // if made false it will run in normal mode , no need to write --headed flag in terminal always now
+    headless: true, // if made false it will run in normal mode , no need to write --headed flag in terminal always now
     screenshot:'on',  //for taking screenshot of every step
     trace: 'on', // 'on','off','retain-on-failure' -->if we want to collect the detailed report of what happened in each automation step
     
