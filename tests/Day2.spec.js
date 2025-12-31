@@ -60,11 +60,12 @@ test('Scenario: Handling Radio Buttons',async ({browser})=>  // test annotation 
     console.log("The radio button is checked: "+isUserChecked);
 
 
+    await page.locator("input#terms").waitFor();
     //Check the terms and conditions checkbox
-    const checkBox = page.locator("input#terms");
+    const checkBox = page.locator("input[name='terms']");
     await checkBox.click();
     //Assertion for checking if the checkbox is ticked
-    await expect(page.locator("input#terms")).toBeChecked();
+    await expect(page.locator("input[name='terms']")).toBeChecked();
     
     // To uncheck the same checkBox
     await checkBox.uncheck(); //But there is no assertion given by playwright to assert if its unchecked or not

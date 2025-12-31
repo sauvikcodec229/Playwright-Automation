@@ -14,7 +14,7 @@ test('Negative Scenario: Logging into Lambda Test',async ({browser})=>  // test 
 
      await page.locator("input[name='email']").waitFor();
      const userName = page.locator("input[name='email']");
-     await userName.fill("test123@gmail.com");
+     await userName.fill("test@gmail.com");
 
      const password = page.locator("input#password");
      await password.fill("test@12345");
@@ -25,6 +25,8 @@ test('Negative Scenario: Logging into Lambda Test',async ({browser})=>  // test 
     //Unlike Selenium we dont need to mention any explicit wait here for visibility of the error msg
     // Even though initially this error msg will nt be displayed until we give the wrong password
     // Playwright has this inbuilt feature of auto wait to wait for sometime for this element to show up.
+     
+     await page.locator("p[data-testid='errors-password']").waitFor();
      const errorText = page.locator("p[data-testid='errors-password']");
      const errorMsg = await errorText.textContent();
      console.log("The Error msg displayed for entering wrong password is : "+errorMsg);
