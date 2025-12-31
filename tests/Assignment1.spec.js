@@ -330,3 +330,154 @@ test('Scenario: Handling Bootstrap Progress Bar',async ({browser})=>
 
 });  
 
+
+test('Scenario: Handling Context Menu',async ({browser})=>  
+{
+     const context = await browser.newContext();
+     const page = await context.newPage(); 
+     await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url
+    
+     await page.waitForTimeout(2000);
+
+      await page.getByRole("listitem").locator("a", { hasText: "Context Menu" }).waitFor();
+
+     const bootstrapLink = page.getByRole("listitem").locator("a", { hasText: "Context Menu" });
+     await bootstrapLink.click();
+
+     await page.locator("#hot-spot").waitFor();
+
+     const menuBox = page.locator("#hot-spot");
+
+     page.on('dialog',dialog => dialog.accept());
+     //Before clicking inside the menu box, we need to listen for an event which is nothing but the opening of a javascript dialog box
+     await menuBox.click({ button: 'right' });
+});  
+
+
+test('Scenario: Handling Data List Filter',async ({browser})=>  
+{
+     const context = await browser.newContext();
+     const page = await context.newPage(); 
+     await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url
+    
+     await page.waitForTimeout(2000);
+
+      await page.getByRole("listitem").locator("a", { hasText: "Data List Filter" }).waitFor();
+
+     const bootstrapLink = page.getByRole("listitem").locator("a", { hasText: "Data List Filter" });
+     await bootstrapLink.click();
+
+     await page.getByPlaceholder("Search Attendees...").waitFor();
+
+     const searchBar = page.getByPlaceholder("Search Attendees...");
+     await searchBar.pressSequentially("Brad");
+
+     const AttendeeDetails = page.locator(".block-info:visible");
+     const companyName = AttendeeDetails.locator("h5");
+     const Name = AttendeeDetails.locator("h4");
+     const Title = AttendeeDetails.locator("p");
+
+     console.log("The Company Name is: "+await companyName.textContent());
+     console.log("The Name of Attendee is: "+await Name.textContent());
+     console.log("The Title is: "+await Title.textContent());
+     
+
+});  
+
+
+test('Scenario: Handling Download of Files',async ({browser})=>  
+{
+     const context = await browser.newContext();
+     const page = await context.newPage(); 
+     await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url
+    
+     await page.waitForTimeout(2000);
+
+      await page.getByRole("listitem").locator("a", { hasText: "Download File Demo" }).waitFor();
+
+     const bootstrapLink = page.getByRole("listitem").locator("a", { hasText: "Download File Demo" });
+     await bootstrapLink.click();
+
+     await page.getByRole("button",{name:"Download File"}).waitFor();
+
+     const downloadBtn = page.getByRole("button",{name:"Download File"});
+    
+     const [download] = await Promise.all([
+      page.waitForEvent('download'),                // Wait for the download event
+      downloadBtn.click()                    // Trigger the download, e.g., clicking the download button
+      ]);
+
+     // Assert the download path exists
+     const path = await download.path();
+     console.log('Downloaded file path:', path);
+     
+
+});  
+
+
+test('Scenario: Handling Drag and Drop Sliders',async ({browser})=>  
+{
+     const context = await browser.newContext();
+     const page = await context.newPage(); 
+     await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url
+    
+     await page.waitForTimeout(2000);
+
+      await page.getByRole("listitem").locator("a", { hasText: "Drag & Drop Sliders" }).waitFor();
+
+     const bootstrapLink = page.getByRole("listitem").locator("a", { hasText: "Drag & Drop Sliders" });
+     await bootstrapLink.click();
+
+     await page.locator('input[type="range"]').nth(0).waitFor();
+
+     //Here we are dealing with Mouse Drag for custom sliders
+     const slider = page.locator('input[type="range"]').nth(0);
+     const amountToSet=40;
+     while(Number(await page.locator("#range").textContent())!==amountToSet)
+     {
+        await slider.focus();
+        await page.keyboard.press('ArrowRight'); 
+     }
+     
+   
+});  
+
+
+test.only('Scenario: Handling Drag and Drop',async ({browser})=>  
+{
+     const context = await browser.newContext();
+     const page = await context.newPage(); 
+     await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url
+    
+     await page.waitForTimeout(2000);
+
+      await page.getByRole("listitem").locator("a", { hasText: "Drag and Drop" }).waitFor();
+
+     const bootstrapLink = page.getByRole("listitem").locator("a", { hasText: "Drag and Drop" });
+     await bootstrapLink.click();
+
+   //   Scenario 1
+     const draggableItem = page.locator("#todrag span[draggable='true']").nth(0);
+     
+     const dropBox = page.locator('#mydropzone');
+
+     await draggableItem.dragTo(dropBox);
+     // Assert the item appears in the dropped items list
+     await expect(page.locator('#droppedlist >> text="Draggable 1"')).toBeVisible();
+
+     await draggableItem.dragTo(dropBox);
+     // Assert the item appears in the dropped items list
+     await expect(page.locator('#droppedlist >> text="Draggable 2"')).toBeVisible();
+
+
+   //   Scenario 2
+   // Perform simple drag and drop
+   const source = page.locator("#draggable");
+   const target = page.locator("#droppable");
+   await source.dragTo(target);
+
+   // Assert success message appears
+   await expect(page.getByText('Dropped!')).toBeVisible();
+     
+   
+});  
