@@ -443,7 +443,7 @@ test('Scenario: Handling Drag and Drop Sliders',async ({browser})=>
 });  
 
 
-test.only('Scenario: Handling Drag and Drop',async ({browser})=>  
+test('Scenario: Handling Drag and Drop',async ({browser})=>  
 {
      const context = await browser.newContext();
      const page = await context.newPage(); 
@@ -456,6 +456,7 @@ test.only('Scenario: Handling Drag and Drop',async ({browser})=>
      const bootstrapLink = page.getByRole("listitem").locator("a", { hasText: "Drag and Drop" });
      await bootstrapLink.click();
 
+     await page.locator("#todrag span[draggable='true']").nth(0).waitFor();
    //   Scenario 1
      const draggableItem = page.locator("#todrag span[draggable='true']").nth(0);
      
@@ -480,4 +481,256 @@ test.only('Scenario: Handling Drag and Drop',async ({browser})=>
    await expect(page.getByText('Dropped!')).toBeVisible();
      
    
+});  
+
+
+
+test('Scenario: Dynamic Data Loading',async ({browser})=>  
+{
+     const context = await browser.newContext();
+     const page = await context.newPage(); 
+     await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url
+    
+     await page.waitForTimeout(2000);
+
+      await page.getByRole("listitem").locator("a", { hasText: "Dynamic Data Loading" }).waitFor();
+
+     const dynaicDataLink = page.getByRole("listitem").locator("a", { hasText: "Dynamic Data Loading" });
+     await dynaicDataLink.click();
+
+     await page.getByRole("button",{name:"Get Random User"}).waitFor();
+
+     const getUserBtn = page.getByRole("button",{name:"Get Random User"});
+     await getUserBtn.click();
+
+     await page.locator("#loading").locator("img").waitFor();
+     const employeeCard = page.locator("#loading");
+
+     console.log("The Employee details are: ");
+     console.log(await employeeCard.textContent());
+
+});  
+
+
+test('Scenario: File Download',async ({browser})=>  
+{
+     const context = await browser.newContext();
+     const page = await context.newPage(); 
+     await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url
+    
+     await page.waitForTimeout(2000);
+
+      await page.getByRole("listitem").locator("a", { hasText: "File Download" }).waitFor();
+
+     const fileDwnload = page.getByRole("listitem").locator("a", { hasText: "File Download" });
+     await fileDwnload.click();
+
+     await page.locator("#textbox").waitFor();
+
+     const textBox = page.locator("#textbox");
+     await textBox.pressSequentially("HELLO WORLD");
+
+     if(page.getByRole("button",{name:"Generate File"}).isEnabled())
+     {
+          await page.getByRole("button",{name:"Generate File"}).click();
+     }
+
+
+     if(await page.locator("[download='Lambdainfo.txt']").isVisible())
+     {
+          const [download] = await Promise.all([
+          page.waitForEvent('download'),                // Wait for the download event
+          page.locator("[download='Lambdainfo.txt']").click(),// Trigger the download, e.g., clicking the download button
+      ]);
+
+        // Assert the download path exists
+         const path = await download.path();
+         console.log('Downloaded file path:', path);
+     }
+
+});  
+
+
+test('Scenario: Hovering',async ({browser})=>  
+{
+     const context = await browser.newContext();
+     const page = await context.newPage(); 
+     await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url
+    
+     await page.waitForTimeout(2000);
+
+      await page.getByRole("listitem").locator("a", { hasText: "Hover Demo" }).waitFor();
+
+     const hoverLink = page.getByRole("listitem").locator("a", { hasText: "Hover Demo" });
+     await hoverLink.click();
+
+     await page.locator(".bg-green-100").waitFor();
+
+     const hoverBtn1 = page.locator(".bg-green-100");
+     await hoverBtn1.hover();
+     
+     const hoverBtn2 = page.locator(".border-green-200");
+     await hoverBtn2.hover();
+     
+     const hoverLink3 = page.getByText("Link Hover");
+     hoverLink3.hover();
+
+     const hoverBtn4 = page.locator("div.flex div.text-gray-800",{hasText:"Hover Me"});
+     hoverBtn4.hover();
+
+
+     const img = page.locator('.image-card img[loading="lazy"]');
+     
+     const transformBefore = await img.evaluate(el => getComputedStyle(el).transform);
+
+     // 2. Hover over the image to trigger the CSS zoom effect
+     await img.hover();
+     // await page.waitForTimeout(2); // Optional: give CSS animation time if needed
+
+     // 3. Get the computed `transform` after hover
+     const transformAfter = await img.evaluate(el => getComputedStyle(el).transform);
+
+     console.log('Transform before:', transformBefore);  // Likely "none"
+     console.log('Transform after: ', transformAfter);   // Should be "matrix(...)" if zoomed
+
+     expect(transformBefore).toBe('none');                  // Before: No transform
+     expect(transformAfter).not.toBe('none');               // After: Some transform is applied
+     expect(transformAfter).toContain('matrix');   
+
+});  
+
+
+test('Scenario: Handling Input Forms',async ({browser})=>  
+{
+     const context = await browser.newContext();
+     const page = await context.newPage(); 
+     await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url
+    
+     await page.waitForTimeout(2000);
+
+      await page.getByRole("listitem").locator("a", { hasText: "Input Form Submit" }).waitFor();
+
+     const inputFormsLnk = page.getByRole("listitem").locator("a", { hasText: "Input Form Submit" });
+     await inputFormsLnk.click();
+
+     await page.locator("#name").waitFor();
+
+     const name = page.locator("#name");
+     const email = page.locator("#inputEmail4");
+     const password = page.locator("#inputPassword4");
+     const company = page.locator("#company");
+     const website = page.locator("#websitename");
+     const countryDropdown = page.locator("[name='country']");
+     const address1 = page.locator("#inputAddress1");
+     const address2 = page.locator("#inputAddress2");
+     const city = page.locator("#inputCity");
+     const state = page.locator("#inputState");
+     const zipCode = page.locator("#inputZip");
+     
+     await name.fill("Sauvik");
+     await email.fill("test@gmail.com");
+     await password.fill("Sauvik1234");
+     await company.fill("Deloitte");
+     await website.fill("www.helloWorld.com");
+     await countryDropdown.selectOption("India");
+     await address1.fill("Bangalore");
+     await address2.fill("Whitefield");
+     await city.fill("Bengaluru");
+     await state.fill("Karnataka");
+     await zipCode.fill("1414414");
+     await page.getByRole("button",{name:"Submit"}).click();
+
+     expect(page.getByText("Thanks for contacting us, we will get back to you shortly.")).toBeVisible();
+
+
+});  
+
+
+
+test('Scenario: Handling iFrames',async ({browser})=>  
+{
+     const context = await browser.newContext();
+     const page = await context.newPage(); 
+     await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url
+    
+     await page.waitForTimeout(2000);
+
+      await page.getByRole("listitem").locator("a", { hasText: "iFrame Demo" }).waitFor();
+
+     const iFrameLink = page.getByRole("listitem").locator("a", { hasText: "iFrame Demo" });
+     await iFrameLink.click();
+
+     await page.locator("#iFrame2").waitFor();
+
+     const framePage = page.frameLocator("#iFrame2");
+     
+     const apiReferenceiFrameBtn = framePage.locator("a", { hasText: "API Reference" });
+     await apiReferenceiFrameBtn.click();
+
+});  
+
+
+
+test('Scenario: Javascript Alerts',async ({browser})=>  
+{
+     const context = await browser.newContext();
+     const page = await context.newPage(); 
+     await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url
+    
+     await page.waitForTimeout(2000);
+
+      await page.getByRole("listitem").locator("a", { hasText: "Javascript Alerts" }).waitFor();
+
+     const javascriptAlertLnk = page.getByRole("listitem").locator("a", { hasText: "Javascript Alerts" });
+     await javascriptAlertLnk.click();
+
+     await page.locator("p",{name:"JavaScript Alerts"}).locator("button",{name:"Click Me"}).nth(0).waitFor();
+   
+     const javascriptAlert = page.locator("p",{name:"JavaScript Alerts"}).locator("button",{name:"Click Me"}).nth(0);
+     const confirmBox = page.locator("p",{name:"Confirm box:"}).locator("button",{name:"Click Me"}).nth(0);
+     const promptBox = page.locator("p",{name:"Prompt box:"}).locator("button",{name:"Click Me"}).nth(0);
+
+      page.on('dialog',dialog => dialog.accept());
+      await javascriptAlert.click();
+      await confirmBox.click();
+      await promptBox.click();
+
+     //   a single page.on('dialog', ...) event handler will handle all three dialogs, even if they are triggered one 
+     // after another by clicking different buttons.
+     // Playwright’s page.on('dialog', ...) listens for any dialog event 
+     // (whether it’s an alert, confirm, or prompt) on that page as long as the handler is
+     //  registered before the dialogs are triggered.
+
+});  
+
+
+test('Scenario: Handling Select Dropdown List',async ({browser})=>  
+{
+     const context = await browser.newContext();
+     const page = await context.newPage(); 
+     await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url
+    
+     await page.waitForTimeout(2000);
+
+      await page.getByRole("listitem").locator("a", { hasText: "Select Dropdown List" }).waitFor();
+
+     const dropdownLink = page.getByRole("listitem").locator("a", { hasText: "Select Dropdown List" });
+     await dropdownLink.click();
+
+     await page.locator("#select-demo").waitFor();
+   
+     const selectDropdown = page.locator("#select-demo");
+     await selectDropdown.selectOption("Wednesday");
+
+     const multiSelect = page.locator("#multi-select");
+
+     await multiSelect.selectOption("Ohio");
+     await page.getByRole("button",{name:"First Selected"}).click();
+
+     // await multiSelect.selectOption([]); WE can do this for deselecting all options
+
+      await multiSelect.selectOption(["New York","Washington"]);
+      await page.getByRole("button",{name:"Get Last Selected"}).click();
+
+
 });  
