@@ -12,8 +12,8 @@ test("Scenario: Application Login",async ({page})=>
   const passwrod = page.locator("#userPassword");
   const loginBtn = page.locator("[value='Login']");
   
-  await username.fill("anshika@gmail.com");
-  await passwrod.fill("Iamking@000");
+  await username.fill("raunak12345@gmail.com");
+  await passwrod.fill("Raunak@12345");
   await loginBtn.click();
 //   await page.waitForLoadState("networkidle");
   await page.locator("div.card-body").first().waitFor(); //waiting for the page to load up by checking for the presence of first item
@@ -78,7 +78,7 @@ test("Scenario: Application Login",async ({page})=>
   //Validating email in Shipping information
 
   const shippingInfoEmail = page.locator(".user__name [type='text']");
-  await expect(shippingInfoEmail.nth(0)).toHaveText("anshika@gmail.com");
+  await expect(shippingInfoEmail.nth(0)).toHaveText("raunak12345@gmail.com");
 
   //Entering CVV code Here we are using +input to get the immediate next sibling of this CVV Code
   const cvvInput = page.locator("div.form__cc div[class='title']:has-text('CVV Code ') + input");

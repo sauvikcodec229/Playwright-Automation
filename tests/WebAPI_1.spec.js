@@ -1,5 +1,9 @@
 const {test, expect,request} = require('@playwright/test');
-const { log } = require('node:console');
+
+// NOTE: For running the script in ide debug mode press, :shift+ctrl+B or shift+cmd+B
+//Then choose "Debug npm script"
+
+
 
 //we are creating this JSON payload as one javascript object
 const loginPayload = {userEmail: "raunak12345@gmail.com", userPassword: "Raunak@12345"};
