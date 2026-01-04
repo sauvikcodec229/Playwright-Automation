@@ -31,7 +31,7 @@ test('Scenario: Handling dropdowns',async ({browser})=>  // test annotation -> /
 }); 
 
 
-test.only('Scenario: Handling Radio Buttons',async ({browser})=>  // test annotation -> //test('test case name', testFunction)
+test('Scenario: Handling Radio Buttons',async ({browser})=>  // test annotation -> //test('test case name', testFunction)
 {
 // NOTE: await is required only when we are performing any playwright related action.
 //  We need to give await only in the scope where playwright related action is performed

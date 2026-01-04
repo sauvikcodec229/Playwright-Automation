@@ -110,8 +110,8 @@ test("Scenario: Finding OrderID in Orders Page",async ({page})=>
   const passwrod = page.locator("#userPassword");
   const loginBtn = page.locator("[value='Login']");
   
-  await username.fill("anshika@gmail.com");
-  await passwrod.fill("Iamking@000");
+  await username.fill("raunak12345@gmail.com");
+  await passwrod.fill("Raunak@12345");
   await loginBtn.click();
 //   await page.waitForLoadState("networkidle");
   await page.locator("div.card-body").first().waitFor(); //waiting for the page to load up by checking for the presence of first item
