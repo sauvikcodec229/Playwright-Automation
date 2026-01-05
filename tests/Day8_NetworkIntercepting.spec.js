@@ -1,5 +1,5 @@
 const { test, expect, request } = require('@playwright/test');
-const { APiUtils } = require('./utils/APiUtils');
+const { APiUtils } = require('../utils/APiUtils');
 
 //we are creating this JSON payload as one javascript object
 const loginPayload = { userEmail: "raunak12345@gmail.com", userPassword: "Raunak@12345" };

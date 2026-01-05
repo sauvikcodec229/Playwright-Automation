@@ -1,5 +1,5 @@
 const {test, expect,request} = require('@playwright/test');
-const {APiUtils} = require('./utils/APiUtils');
+const {APiUtils} = require('../utils/APiUtils');
 
 //Sometimes the storing of the api tokens is not simple like how we saw in rahul shetty application 
 //under local storage. In some banking applications, developers store the session ids in a more complex and 
