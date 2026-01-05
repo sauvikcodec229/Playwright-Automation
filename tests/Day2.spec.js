@@ -61,8 +61,7 @@ test('Scenario: Handling Radio Buttons',async ({browser})=>  // test annotation 
     const isUserChecked = await radioButton2.isChecked(); //It will return boolean true or false
     console.log("The radio button is checked: "+isUserChecked);
 
-
-    await page.locator("input[name='terms']").waitFor();
+    await page.waitForTimeout(2000);
     //Check the terms and conditions checkbox
     const checkBox = page.locator("input[name='terms']");
     await checkBox.click();
