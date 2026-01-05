@@ -1,3 +1,5 @@
+const {expect} = require('@playwright/test');
+
 class LoginPage
 {
     constructor(page)
@@ -18,6 +20,7 @@ class LoginPage
         await this.username.fill(username);
         await this.password.fill(password);
         await this.logInBtn.click();
+        await this.page.locator("div.card-body").first().waitFor(); //waiting for the page to load up by checking for the presence of first item
     }
 }
 
