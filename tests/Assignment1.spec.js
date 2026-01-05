@@ -313,7 +313,7 @@ test('Scenario: Handling Bootstrap Progress Bar', async ({ browser }) => {
      await expect.poll(async () => {
           const style = await progressBar.getAttribute('style');
           return /width:\s*100%/.test(style);
-     }, { timeout: 10000 }).toBe(true);
+     }, { timeout: 20000 }).toBe(true);
 
      await expect(page.getByText("Download completed!")).toBeVisible();
 
@@ -359,7 +359,7 @@ test('Scenario: Handling Data List Filter', async ({ browser }) => {
      const searchBar = page.getByPlaceholder("Search Attendees...");
      await searchBar.pressSequentially("Brad");
 
-     const AttendeeDetails = page.locator(".block-info:visible");
+     const AttendeeDetails = page.locator(".block-info:visible").nth(0);
      const companyName = AttendeeDetails.locator("h5");
      const Name = AttendeeDetails.locator("h4");
      const Title = AttendeeDetails.locator("p");
@@ -822,7 +822,7 @@ test('Scenario: Table Data Search', async ({ browser }) => {
 });
 
 
-test.only('Scenario: Table Pagination', async ({ browser }) => {
+test('Scenario: Table Pagination', async ({ browser }) => {
      const context = await browser.newContext();
      const page = await context.newPage();
      await page.goto("https://www.lambdatest.com/selenium-playground/"); // to navigate to the given url

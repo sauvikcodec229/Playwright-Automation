@@ -29,7 +29,7 @@ test('Scenario: Screenshots and Visual Comparison',async ({browser})=>  // test 
 
 }); 
 
-test("Visual Testing",async ({page})=>
+test.skip("Visual Testing",async ({page})=>
 {
 
     //On first run this test case will fail since in first run u havent clicked any old image

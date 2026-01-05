@@ -130,7 +130,7 @@ test("Scenario: Security test Faking Request Body by intercepting the Request", 
   await viewBtn.click();
 
   await expect(page.locator("p").last()).toHaveText("You are not authorize to view this order");
-  console.log(await page.locator("p").last().toHaveText());
+  console.log(page.locator("p").last().textContent());
 
 
 
