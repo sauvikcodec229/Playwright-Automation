@@ -1,5 +1,6 @@
 // @ts-check
 import { chromium, defineConfig, devices } from '@playwright/test';
+import { permission } from 'node:process';
 
 
 /**
@@ -37,17 +38,19 @@ import { chromium, defineConfig, devices } from '@playwright/test';
 
 // ---------------------------------------------------------------------------------
 
-
+// Whatever we write under use:{} happens on individual test case level
+//Outside of that whatever we write happens on overall project
 // 2.
 const config = ({
 
   testDir: './tests',  //whatever tests present inside the test folder will get triggered
+  retries:1, //it will retry the test cases failed due to flakiness 1 more time. It will retry the number of times we give
   //Playwright enforces a timeout for each test for around 30 seconds default.
   //  Use explicit timeouts when you think the default one is not enough for me, otherwise not required
   
   testMatch: ['**/Assignment*.spec.js','**/WebAPI*.spec.js','**/Day*.spec.js',], //to run a specific test under the test directory
 
-  // testMatch: ['**/Assignment*.spec.js'],            
+  // testMatch: ['**/Day2*.spec.js'],            
   timeout : 50*1000, // or we can also write 40000 ms, it takes in ms format. 
   // This is applicable to the entire project and to all tests like waiting for button to be clickable
   
@@ -62,8 +65,22 @@ const config = ({
     browserName:'chromium', //setting the browser 
     headless: true, // if made false it will run in normal mode , no need to write --headed flag in terminal always now
     screenshot:'on',  //for taking screenshot of every step
+    // video:'retain-on-failure',
     trace: 'retain-on-failure', // 'on','off','retain-on-failure' -->if we want to collect the detailed report of what happened in each automation step
-    
+    //viewport: {widht:720,height:720}      //it tells how the browser needs to open , in waht size
+    //we use this option for responsive testing like, whether in small size like mobile window all elements are resizing and properly rendering or not
+    //If our website is mobile friendly then we can decrease the size and do the testing.
+
+    //Sometimes if website is not SSL Certified, we might get error on the screen
+    //In order to accept those certificates by going advanced, we have a playwright property for doing that
+    ignoreHttpsErrors:true,
+
+    //now sometimes we get popups or notifications related to geolocations, like "google wants to know your location"
+    //If we want to handle such popups we can do using this
+    permissions:['geolocation'], //our browser will click on allow button
+
+
+
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     // trace: 'on-first-retry',
   },
