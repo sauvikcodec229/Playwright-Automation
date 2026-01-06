@@ -3,13 +3,14 @@ const { test, expect } = require('@playwright/test');
 const {customTest} = require("../utils/test-base");
 
 const { pageObjectManager } = require("../pageObjects/pageObjectManager");
-const fs = require('fs');
-const path = require('path');
-const dataFilePath = path.resolve(__dirname, "../utils/POM_testData.json"); //saving my JSON file path
-const dataSet = JSON.parse(JSON.stringify(require(dataFilePath))); //converting JSON to JS object
 
 //People generally , for every test case they prepare the test data as a fixture in the test-base.js file
 //SO if we have 40 tests then we will create  40 properties like this inside our custom "base.text.extend" 
+
+// Q>Can we customise our test behaviour?
+// Ans> Yes we can do that by first using the properties if 'test' as the base and then top of that 
+//add our own custom fxitures/properties which is our test data which will result in a 'customTest' 
+//hence we can use it. Our test will behave in that way then
 
  customTest("Scenario: Creating Order for product", async ({ page,testDataForOrder }) => {  //Here test naming is also dynamically being done here
 

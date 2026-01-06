@@ -44,13 +44,16 @@ import { permission } from 'node:process';
 const config = ({
 
   testDir: './tests',  //whatever tests present inside the test folder will get triggered
-  retries:1, //it will retry the test cases failed due to flakiness 1 more time. It will retry the number of times we give
-  //Playwright enforces a timeout for each test for around 30 seconds default.
-  //  Use explicit timeouts when you think the default one is not enough for me, otherwise not required
-  
+  retries:2, //it will retry the test cases failed due to flakiness 1 more time. It will retry the number of times we give
+  // workers: 1, // to specify how many cases in parallel we can run
   testMatch: ['**/Assignment*.spec.js','**/WebAPI*.spec.js','**/Day*.spec.js',], //to run a specific test under the test directory
 
-  // testMatch: ['**/Day2*.spec.js'],            
+  // testMatch: ['**/Day2*.spec.js'],     
+  
+  
+  //Playwright enforces a timeout for each test for around 30 seconds default.
+  //Use explicit timeouts when you think the default one is not enough for me, otherwise not required
+  
   timeout : 50*1000, // or we can also write 40000 ms, it takes in ms format. 
   // This is applicable to the entire project and to all tests like waiting for button to be clickable
   
@@ -91,3 +94,8 @@ const config = ({
 // in our project.
 module.exports = config
 
+//Playwright by default works on 5 workers, that means 5 test cases in parallel we can run
+//each test file ".spec.js" , playwright will assign to one worker and they will run in parallel
+//but each test inside a ".spec.js" file will be run in sequential manner.
+//We can specify how many workers we want to run in parallel but default is 5
+// A worker is a test execution process

@@ -1,6 +1,5 @@
 const base= require('@playwright/test');
 
-
 exports.customTest = base.test.extend(  //we are exporting this entire fixture with test, 
 // base.test we are wiriting to make sure all the properties from base whcih is the js object
 //  we got from "playwright/test" , we also get them into test whicb is iur custom fixture
