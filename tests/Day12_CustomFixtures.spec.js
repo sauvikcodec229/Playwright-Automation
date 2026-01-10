@@ -12,7 +12,7 @@ const { pageObjectManager } = require("../pageObjects/pageObjectManager");
 //add our own custom fxitures/properties which is our test data which will result in a 'customTest' 
 //hence we can use it. Our test will behave in that way then
 
- customTest("Scenario: Creating Order for product", async ({ page,testDataForOrder }) => {  //Here test naming is also dynamically being done here
+ customTest("@Web Scenario: Creating Order for product", async ({ page,testDataForOrder }) => {  //Here test naming is also dynamically being done here
 
         const pageManager = new pageObjectManager(page);
         const loginPage = pageManager.getLoginPage();

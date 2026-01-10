@@ -77,7 +77,7 @@ test.beforeEach( ()=>
 });
 
 
-test("Scenario: Application Login using Special Selectors",async ({page})=>
+test("@Api Scenario: Application Login using Special Selectors",async ({page})=>
 {
   
   //Just as Selenium Playwright also supports Javascript code execution
@@ -101,7 +101,7 @@ test("Scenario: Application Login using Special Selectors",async ({page})=>
 });
 
 
-test("Scenario: Finding OrderID in Orders Page",async ({page})=>
+test("@Api Scenario: Finding OrderID in Orders Page",async ({page})=>
 {
   
   await page.addInitScript(value => {

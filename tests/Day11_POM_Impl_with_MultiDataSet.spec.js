@@ -8,11 +8,13 @@ const dataSet = JSON.parse(JSON.stringify(require(dataFilePath))); //converting 
 
 let orderID;
 
+test.describe.configure({mode:'serial'});
+
 //################## Placing orders for different items #######################
 
 for (const data of dataSet) { //iterating thorugh the dataSet array, 1st iteration we will get the data of Zara Coat 4 from json file, and so on
 
-    test(`Scenario: Creating Order for ${data.productName}`, async ({ page }) => {  //Here test namingnis also dynamically being done here
+    test(`@Web Scenario: Creating Order for ${data.productName}`, async ({ page }) => {  //Here test namingnis also dynamically being done here
 
         const pageManager = new pageObjectManager(page);
         const loginPage = pageManager.getLoginPage();
@@ -45,7 +47,7 @@ for (const data of dataSet) { //iterating thorugh the dataSet array, 1st iterati
 
 //##############Writing the generated orderIDs back to JSON ##################
 
-test("Writing the Modified Data from memory to Actual JSON File",async () => {
+test("@Web Writing the Modified Data from memory to Actual JSON File",async () => {
     fs.writeFileSync(dataFilePath, JSON.stringify(dataSet, null, 2), 'utf-8');  //this null, 2 is for pretty printing the JSON file(Not necessary but looks good)
     console.log('All updated OrderIDs written back to JSON file.');
 });
@@ -54,7 +56,7 @@ test("Writing the Modified Data from memory to Actual JSON File",async () => {
 
 for (const data of dataSet) {
 
-    test(`Scenario: Finding OrderID ${data.orderID} in Orders Page`, async ({ page }) => {
+    test(`@Web Scenario: Finding OrderID ${data.orderID} in Orders Page`, async ({ page }) => {
 
         const pageManager = new pageObjectManager(page);
         const loginPage = pageManager.getLoginPage();

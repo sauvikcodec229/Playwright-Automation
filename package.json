@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-
     "regression": "npx playwright test",
     "webTests": "npx playwright test --grep @Web",
-    "apiTests": "npx playwright test --grep @Api"
+    "apiTests": "npx playwright test --grep @Api",
+    "allureExecution": "npx playwright test --reporter=line,allure-playwright",
+    "webKitTest": "npx playwright test --config playwright.config_test.js --project=safari"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,9 @@
   "devDependencies": {
     "@playwright/test": "^1.57.0",
     "@types/node": "^25.0.3",
-    "exceljs":"^4.4.0"
+    "exceljs": "^4.4.0"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^12.5.0"
   }
 }
