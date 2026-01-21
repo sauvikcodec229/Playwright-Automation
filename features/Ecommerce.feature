@@ -5,6 +5,8 @@ Feature: Ecommerce Validations
 #  We can use this command (npx cucumber-js) -> "npx" will automatically go to the node-modules/.bin 
 # and then it will go to the file name that you have specified like cucumber-js
 
+# Cucumber Hooks are used for setting up and tear down of data before/after each SCENARIO
+
   Scenario: Placing the order for multiple products using Data Driven testing
     Given I login to Ecommerce application with "raunak12345@gmail.com" and "Raunak@12345"
     When Add "ZARA COAT 3" to the cart

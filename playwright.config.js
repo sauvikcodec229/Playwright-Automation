@@ -45,10 +45,10 @@ const config = ({
 
   testDir: './tests',  //whatever tests present inside the test folder will get triggered
   retries:2, //it will retry the test cases failed due to flakiness 1 more time. It will retry the number of times we give
-  // workers: 1, // to specify how many cases in parallel we can run
-  testMatch: ['**/Assignment*.spec.js','**/WebAPI*.spec.js','**/Day*.spec.js',], //to run a specific test under the test directory
+  // workers: 2, // to specify how many cases in parallel we can run
+  // testMatch: ['**/Assignment*.spec.js','**/WebAPI*.spec.js','**/Day*.spec.js',], //to run a specific test under the test directory
 
-  // testMatch: ['**/Day2*.spec.js'],     
+  testMatch: ['**/Day2*.spec.js'],     
   
   
   //Playwright enforces a timeout for each test for around 30 seconds default.
@@ -66,7 +66,7 @@ const config = ({
   use: {
   
     browserName:'chromium', //setting the browser 
-    headless: true, // if made false it will run in normal mode , no need to write --headed flag in terminal always now
+    headless: false, // if made false it will run in normal mode , no need to write --headed flag in terminal always now
     screenshot:'on',  //for taking screenshot of every step
     // video:'retain-on-failure',
     trace: 'retain-on-failure', // 'on','off','retain-on-failure' -->if we want to collect the detailed report of what happened in each automation step

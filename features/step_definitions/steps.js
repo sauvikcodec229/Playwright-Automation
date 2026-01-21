@@ -1,31 +1,27 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const { pageObjectManager } = require("../../pageObjects/pageObjectManager");
-const {expect} = require('@playwright/test');
-const playwright  = require('@playwright/test');
+const { expect } = require('@playwright/test'); //This uses object destructuring to extract a property
+//  named "expect" from the exported object of the module. So basically we are exporting a property
+
+const playwright = require('@playwright/test'); // will give you the entire module object,
+//  so you'd access things like playwright.test, playwright.expect, etc.So bascially
+//  here we exporting an entire module object
 
 
 //Cucumber JS also allows us to put specific timeouts specific to a particular step definition
-Given('I login to Ecommerce application with {string} and {string}',{timeout: 100*1000}, async function (username, password) {
+Given('I login to Ecommerce application with {string} and {string}', { timeout: 100 * 1000 }, async function (username, password) {
 
-    //Earlier the browser and page fixtures were directly exposed or given by test
-    // But here we dont have test, so we need to explicitly call the function chromium.launch() from playwright library
-
-    const browser = await playwright.chromium.launch({headless:true});
-    this.context = await browser.newContext();
-    this.page = await this.context.newPage();
-
-    this.pageManager = new pageObjectManager(this.page); // "this." is the WORLD CONSTRUCTOR.
+    // this.pageManager = new pageObjectManager(this.page); // "this." is the WORLD CONSTRUCTOR.
     //As long as we are in the same scenario, playwright can share these variables defined as
     //part of world constructor in all the step definition functions. These variables are actually part
     //of World Constructor so their scope is throughout this Class
 
-
     this.loginPage = this.pageManager.getLoginPage();
     await this.loginPage.goto("https://rahulshettyacademy.com/client/#/auth/login");
     await this.page.waitForTimeout(2000);
-    this.username=username;
-    this.password=password;
-    await this.loginPage.validLogin(username,password);
+    this.username = username;
+    this.password = password;
+    await this.loginPage.validLogin(username, password);
 });
 
 When('Add {string} to the cart', async function (product) {
@@ -57,7 +53,7 @@ Then('I verify the order is successfully placed', async function () {
 });
 
 
-Then('I verify the order in the order history page', {timeout: 100*1000},async function () {
+Then('I verify the order in the order history page', { timeout: 100 * 1000 }, async function () {
 
     const allOrdersPage = this.pageManager.getAllOrdersPage();
     this.loginPage.goto("https://rahulshettyacademy.com/client/#/auth/login");
